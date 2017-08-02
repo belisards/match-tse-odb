@@ -1,5 +1,5 @@
 #!/bin/bash
-# = Tribuna =
+# = Banco de dados de doações a campanhas pela Odebrecht. Script baseado na Tribuna =
 # https://github.com/rafapolo/tribuna
 
 source `dirname $0`/config.env
@@ -75,6 +75,13 @@ for i in ${fontes_tse[*]}; do
 	clean "$ano"
 done
 cd ..
+
+# Baixa dados pré-2002. Fonte: TSE, digitalizado por David Samuels e adaptado por Bruno Carazza
+wget -O pre2002.xlsx http://leisenumeros.com.br/wp-content/uploads/2016/06/bruno-carazza-dados-de-doac3a7c3b5es-eleitorais-de-1994-e-1998-por-david-samuels-ajustados-por-bruno-carazza.xlsx
+echo "=> Convertendo para CSV"
+xlsx2csv pre2002.xlsx > csv/pre2002.csv
+rm pre2002.xlslx
+
 
 # Import data from CSV into the database
 for sql in scripts/sql_load_csv/*.sql; do
