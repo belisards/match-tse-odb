@@ -21,3 +21,13 @@ A solução do Tribuna foi adotado como método para tratamento dos dados do TSE
 O processo de análise dos dados e elaboração do scripts foi feito por Rafael Polo, Álvaro Turicas e Adriano Belisário.
 
 Esta investigação foi apoiada pela [Connectas](http://connectas.org/).
+
+---
+
+### Qual a fonte dos dados?
+
+Os dados são do Repositório de Dados Eleitorais do TSE.
+
+Para os anos de 1994 e 1998, foram utilizados os dados disponibilizados por Bruno Carazza.
+
+Os valores são corrigidos tomando como base a inflação média de cada ano segundo o IPCA e convertidos de acordo com o dolár médio de junho de 2017.

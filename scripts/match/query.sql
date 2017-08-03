@@ -62,6 +62,7 @@ or doador = 'ODEBRECHT COM E IND DE CAFE LTDA' or cpf_doador = '78597150000111'
 or doador = 'FLAVIO APARECIDO PERES' or cpf_doador = '97580929872' 
 or doador = 'CARIOCA CHRISTIANI NIELSEN ENGENHARIA S A' 
 or doador =  'SIDIANA MARIA KIEPPER'
+or doador LIKE 'BRASKARKE%'
 # Quattor só foi comprada pela Odebrecht em 2010
 or (ano < '2010' AND cpf_doador = '04705090000177')
 #Suzano Petroquimica comprada em 2007
@@ -77,14 +78,54 @@ UPDATE grupodb
 SET doador = 'Braskem'
 WHERE cpf_doador LIKE '42150391%';
 
+update grupodb
+set doador = doador_original
+where doador_original is not null and doador_original <> '';
+
+### Correção monetária
+UPDATE `grupodb` SET `valor_at` = CASE
+  	WHEN ano = 1994 THEN valor * 7.01399555092
+    WHEN ano = 1998 THEN valor * 3.30783660603
+    WHEN ano = 2000 THEN valor * 2.9469836327
+    WHEN ano = 2002 THEN valor * 2.54338537892
+    WHEN ano = 2004 THEN valor * 2.0799195046
+    WHEN ano = 2006 THEN valor * 1.86807096785
+    WHEN ano = 2008 THEN valor * 1.70558593805
+    WHEN ano = 2010 THEN valor * 1.54809714061
+    WHEN ano = 2012 THEN valor * 1.37732840188
+    WHEN ano = 2014 THEN valor * 1.21967315647
+    WHEN ano = 2016 THEN valor * 1.02875495291
+    ELSE `valor_at`
+    END;
 
 # Geral
-SELECT *
+SELECT 
+grupodb.id,
+grupodb.uf,
+grupodb.partido,
+grupodb.cargo,
+grupodb.candidato,
+grupodb.numero,
+grupodb.ano,
+grupodb.cpf_candidato,
+grupodb.doador,
+grupodb.doador_original,
+grupodb.cpf_doador,
+grupodb.cpf_doador_original,
+grupodb.recurso,
+grupodb.data,
+grupodb.setor_economico,
+grupodb.motivo,
+grupodb.valor,
+grupodb.valor_at,
+grupodb.tipo
 FROM grupodb
 INTO OUTFILE '/var/lib/mysql-files/geral.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
+
+
 
 /*
 # Total por doador

@@ -51,7 +51,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes INNER JOIN prefixos_cnpj 
 ON TRIM(doacoes.cpf_doador_original) LIKE CONCAT(prefixos_cnpj.inicio, '%')
@@ -77,7 +79,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes INNER JOIN prefixos_cnpj 
 ON TRIM(doacoes.cpf_doador) LIKE CONCAT(prefixos_cnpj.inicio, '%')
@@ -103,7 +107,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes
 INNER JOIN documentos
@@ -129,7 +135,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes
 INNER JOIN documentos
@@ -155,7 +163,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes
 WHERE doador LIKE '%Brask%' OR doador LIKE '%Odebre%' OR doador LIKE '%Ordebr%' 
@@ -183,7 +193,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes
 INNER JOIN nomes
@@ -209,7 +221,9 @@ doacoes.recurso,
 doacoes.data,
 doacoes.setor_economico,
 doacoes.motivo,
+doacoes.valor_at,
 doacoes.valor,
+doacoes.dolar,
 doacoes.tipo
 FROM doacoes
 INNER JOIN nomes
@@ -245,3 +259,5 @@ UNION
 SELECT 
 *
 FROM doa_doc_orig;
+
+
