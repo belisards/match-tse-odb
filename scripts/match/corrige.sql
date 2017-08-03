@@ -1,7 +1,6 @@
 USE tse;
 
 ### Correção monetária
-
 UPDATE `doacoes` SET `valor_at` = CASE
     WHEN ano = 1994 THEN valor * 7.01399555092
     WHEN ano = 1998 THEN valor * 3.30783660603
@@ -18,6 +17,4 @@ UPDATE `doacoes` SET `valor_at` = CASE
     END;
 
 # Converte para dolar
-    ALTER TABLE doacoes
-    ADD dolar double(12,2);
-    UPDATE `doacoes` SET `dolar` = valor_at / 3.2
+    UPDATE `doacoes` SET `dolar` = valor_at / 3.2;
