@@ -13,6 +13,8 @@ Inicialmente, a partir de fontes públicas e processo manuais e automatizados, f
 
 A solução do Tribuna foi adotado como método para tratamento dos dados do TSE. Assim, através de scripts SQL, é feita uma comparação (match) entre nomes, empresas e documentos mapeados com as doações declaradas. Posteriormente, outro script faz a exclusão de homônimos e resultados incertos para, enfim, gerar a listagem final de doações identificadas. A fim de padronizar o documento para a visualização dos dados, foram feitas transformações no campo de nome do doador no Open Refine.
 
+O script foi desenvolvido e testado em ambiente Debian. Para rodá-lo localmente, utilize o arquivo "config.env".
+
 
 ---
 

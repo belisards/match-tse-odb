@@ -13,6 +13,7 @@ CREATE TABLE `tse`.`doacoes` (
   `cpf_candidato` varchar(20) DEFAULT NULL,
   `doador_original` varchar(255) DEFAULT NULL,
   `doador` varchar(255) DEFAULT NULL,
+  `doador_norm` varchar(255) DEFAULT NULL,
   `cpf_doador` varchar(20) DEFAULT NULL,
   `cpf_doador_original` varchar(20) DEFAULT NULL,
   `recurso` varchar(255) DEFAULT NULL,
@@ -21,7 +22,7 @@ CREATE TABLE `tse`.`doacoes` (
   `motivo` varchar(255) DEFAULT NULL,
   `valor` double(12,2) DEFAULT NULL,
   `valor_at` double(12,2) DEFAULT NULL,
-  `dolar` varchar(60) DEFAULT NULL,
+  `dolar` double(12,2) DEFAULT NULL,
   `tipo` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;

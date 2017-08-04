@@ -1,66 +1,79 @@
 USE tse;
 
 
-# Regulariza nome Construtora
+# Regulariza nomes
 UPDATE grupodb
-SET doador = 'Construtora'
+SET doador_norm = 'Construtora'
 WHERE cpf_doador LIKE '15102288%' 
 or doador LIKE 'NORBERTO ODEBRECHT S.A%'
-or (doador not like 'CETREL%' and doador like 'CONST%'  );
+or (doador not like 'CETREL%' and doador like 'C%'  );
 
 UPDATE grupodb
-SET doador = 'Braskem'
+SET doador_norm = 'Braskem'
 WHERE cpf_doador LIKE '42150391%'
-or doador like 'Braske%';
+or doador like 'Braske%'
+or doador like 'BRASKE%';
 
 UPDATE grupodb
-SET doador = 'Quattor'
-WHERE doador LIKE 'Quattor%';
+SET doador_norm = 'Quattor'
+WHERE doador LIKE 'Quattor%' or doador LIKE 'Quattar%';
 
 UPDATE grupodb
-SET doador = 'O. Realizações Imobiliárias'
-WHERE doador LIKE 'Odebrecht Reali%';
+SET doador_norm = 'O. Realizações Imobiliárias'
+WHERE doador LIKE 'Odebrecht Reali%'
+or doador LIKE 'ODEBRECHT REAL%';
 
 UPDATE grupodb
-SET doador = 'O. Agroindustrial'
-WHERE doador LIKE 'Odebrecht Agro%';
+SET doador_norm = 'O. Agroindustrial'
+WHERE doador LIKE 'Odebrecht Agro%'
+or doador LIKE 'ODEBRECHT AGROI%';
 
 UPDATE grupodb
-SET doador = 'Pedro Carneiro Leão'
+SET doador_norm = 'O. Ambiental'
+WHERE doador LIKE 'ODEBRECHT AMBIENTAL%';
+
+UPDATE grupodb
+SET doador_norm = 'Pedro Carneiro Leão'
 WHERE doador LIKE 'PEDRO AUGUS%';
 
 UPDATE grupodb
-SET doador = 'Alexandrino Alencar'
+SET doador_norm = 'Alexandrino Alencar'
 WHERE doador LIKE 'Alexandrino de%';
 
 UPDATE grupodb
-SET doador = 'Embraport'
-WHERE doador LIKE 'EMBRAPORT%';
+SET doador_norm = 'Embraport'
+WHERE doador LIKE 'EMBRAP%';
 
 UPDATE grupodb
-SET doador = 'Enseada Ind. Naval'
+SET doador_norm = 'Enseada Ind. Naval'
 WHERE doador LIKE 'ENSEADA%' or doador LIKE 'ESTALEIRO%';
 
 UPDATE grupodb
-SET doador = 'ETH'
+SET doador_norm = 'ETH'
 WHERE doador LIKE 'ETH%';
 
 UPDATE grupodb
-SET doador = 'Ismael Campos'
+SET doador_norm = 'Ismael Campos'
 WHERE doador LIKE 'Ismael Campos%';
 
 UPDATE grupodb
-SET doador = 'Ruy Lemos'
+SET doador_norm = 'Ruy Lemos'
 WHERE doador LIKE 'RUI LEMOS%' or doador LIKE 'RUY LEMOS%';
 
 UPDATE grupodb
-SET doador = 'O. Óleo e Gás'
-WHERE doador LIKE 'ODEBRECHT OLEO%' or doador LIKE 'ODEBRECHT ÓLEO%';
+SET doador_norm = 'O. Óleo e Gás' 
+WHERE doador LIKE 'ODEBRECHT OLEO%' or doador LIKE 'ODERBRECHT OLE%' or doador LIKE 'ODEBRECH OLEO%' or doador LIKE 'ODEBRECHT ÓLEO%';
 
+UPDATE grupodb
+SET partido = 'DEM' 
+WHERE partido = ' PFL';
+
+# Copia o campo doador original para o campo doador, quando existir
 update grupodb
-set doador = doador_original
+SET doador_norm = doador_original
 where doador_original is not null and doador_original <> '';
 
+UPDATE grupodb SET `doador_norm` = UPPER( `doador` );
 
 # Geral
 SELECT 
@@ -74,6 +87,7 @@ grupodb.ano,
 grupodb.cpf_candidato,
 grupodb.doador,
 grupodb.doador_original,
+grupodb.doador_norm,
 grupodb.cpf_doador,
 grupodb.cpf_doador_original,
 grupodb.recurso,
@@ -99,9 +113,9 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
 
 
-SELECT id, uf, partido, cargo, candidato, ano, dolar 
+SELECT id, uf, partido, cargo, candidato, ano, doador, dolar 
 FROM grupodb
-INTO OUTFILE '/var/lib/mysql-files/table.csv'
+INTO OUTFILE '/var/lib/mysql-files/table-dolar.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
