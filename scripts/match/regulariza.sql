@@ -8,22 +8,26 @@ update grupodb
 SET doador_norm = doador_original
 where doador_original is not null and doador_original <> '';
 
-
 # Regulariza nomes
 UPDATE grupodb
 SET doador_norm = 'Construtora'
 WHERE cpf_doador LIKE '15102288%' 
 or doador LIKE 'Cons%'
-or (doador = 'NORBERTO ODEBRECHT S.A' and ano = '1994')
+or ((doador LIKE 'NORBERTO ODEBRECHT%' or doador LIKE 'ODEBRECHT') and ano < '2002')
+or ((doador LIKE 'NORB ODEBRECHT%' or doador LIKE 'ODEBRECHT') and ano = '2006')
 or doador LIKE 'CO0NS%'
 or doador LIKE 'C N ODEB%'
 or doador LIKE 'Contrutora%'
-or doador_original LIKE 'Const%'
-or id = '70970';
+or doador_original LIKE 'Const%';
 
 UPDATE grupodb
 SET doador_norm = 'NORBERTO ODEBRECHT'
-WHERE doador LIKE 'NORBERTO ODEBRECHT';
+WHERE doador LIKE 'NORBERTO ODEBRECHT' and ano > '2000';
+
+UPDATE grupodb
+SET doador_norm = 'CBPO'
+WHERE doador LIKE 'CBPO%' or doador_original LIKE 'CBPO%' or doador LIKE 'C.B.P.O%' or doador LIKE 'CBOP' or cpf_doador = '61156410000110';
+
 
 UPDATE grupodb
 SET doador_norm = 'Braskem'
@@ -36,21 +40,22 @@ SET doador_norm = 'Quattor'
 WHERE doador LIKE 'Quattor%' or doador LIKE 'Quattar%';
 
 UPDATE grupodb
-SET doador_norm = 'Realizações Imobiliárias'
+SET doador_norm = 'O. Realizações Imobiliárias'
 WHERE doador LIKE 'Odebrecht Reali%'
 or doador_original LIKE 'ODEBRECHT REAL%';
 
 UPDATE grupodb
-SET doador_norm = 'Agroindustrial'
+SET doador_norm = 'O. Agroindustrial'
 WHERE doador LIKE 'Odebrecht Agro%'
+or doador LIKE 'ETH%'
 or doador_original LIKE 'ODEBRECHT AGROI%';
 
 UPDATE grupodb
-SET doador_norm = 'Ambiental'
+SET doador_norm = 'O. Ambiental'
 WHERE doador LIKE 'ODEBRECHT AMBIENTAL%' or doador_original LIKE 'ODEBRECHT AMBIENTAL%';
 
 UPDATE grupodb
-SET doador_norm = 'Serviços'
+SET doador_norm = 'O. Serviços'
 WHERE doador LIKE 'ODEBRECHT SERV%' or doador_original LIKE 'ODEBRECHT SERV%';
 
 UPDATE grupodb
@@ -66,8 +71,8 @@ SET doador_norm = 'Alexandrino Alencar'
 WHERE doador LIKE 'Alexandrino de%';
 
 UPDATE grupodb
-SET doador_norm = 'ANTONIO DE CASTRO'
-WHERE doador LIKE 'ANTONIO DE CASTRO%';
+SET doador_norm = 'Catabas'
+WHERE doador LIKE 'Catabas%';
 
 UPDATE grupodb
 SET doador_norm = 'Embraport'
@@ -78,10 +83,6 @@ UPDATE grupodb
 SET doador_norm = 'Enseada Ind. Naval'
 WHERE doador LIKE 'ENSEADA%' or doador LIKE 'ESTALEIRO%'
 OR doador_original LIKE 'ENSEADA%' or doador_original LIKE 'ESTALEIRO%';
-
-UPDATE grupodb
-SET doador_norm = 'ETH'
-WHERE doador LIKE 'ETH%';
 
 UPDATE grupodb
 SET doador_norm = 'Ismael Campos'

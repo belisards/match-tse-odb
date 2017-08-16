@@ -173,10 +173,9 @@ doacoes.valor,
 doacoes.dolar,
 doacoes.tipo
 FROM doacoes
-WHERE doador LIKE '%Brask%' OR doador LIKE '%Odebre%' OR doador LIKE '%Ordebr%' 
-OR doador LIKE '%Brasque%' OR  doador LIKE '%Oubrecht%' OR doador LIKE '%Adebrecht%' OR doador LIKE '%Odevrecht%' OR doador LIKE '%Oderbrecht%' OR doador LIKE '%Edebrecht%' OR doador LIKE '%Construtora Noberto%' OR doador LIKE 'Oubrecht'
-OR doador_original LIKE '%Brask%' OR doador_original LIKE '%Odebre%' 
-OR doador_original LIKE '%Brasque%' OR  doador_original LIKE '%Oubrecht%' OR doador_original LIKE '%Adebrecht%' OR doador_original LIKE '%Odevrecht%' OR doador_original LIKE '%Oderbrecht%' OR doador_original LIKE '%Edebrecht%' OR doador_original LIKE '%Construtora Noberto%' OR doador_original LIKE 'Oubrecht' ;
+WHERE doador LIKE '%Brask%' or doador like 'supervia%'OR doador LIKE '%CETREL%' OR doador_original LIKE '%CETREL%'OR doador LIKE '%Odebre%' OR doador LIKE '%SANEATINS%' or doador like '%energipar%'OR doador LIKE '%Ordebr%' 
+OR doador LIKE '%Brasque%' OR  doador LIKE '%Oubrecht%' OR doador LIKE '%Adebrecht%' OR doador LIKE '%Odevrecht%' OR doador LIKE '%Oderbrecht%' OR doador LIKE '%Edebrecht%' OR doador LIKE '%Construtora Noberto%' OR doador LIKE 'Oubrecht' or doador LIKE 'quantiq' OR doador LIKE '%CETREL%' OR doador_original LIKE '%Brask%' OR doador_original LIKE '%Odebre%' or doador like 'CERVEJARIA PETR%'
+OR doador_original LIKE '%Brasque%' OR  doador_original LIKE '%Oubrecht%' OR doador_original LIKE '%Adebrecht%' OR doador_original LIKE '%Odevrecht%' OR doador_original LIKE '%Oderbrecht%' OR doador_original LIKE '%Edebrecht%' OR doador_original LIKE '%Construtora Noberto%' OR doador_original LIKE 'Oubrecht' OR doador_original LIKE '%CETREL%' or doador_original like 'CERVEJARIA PETR%';
 
 # Consulta por nome
 DROP TABLE IF EXISTS doa_rzsocial;
@@ -279,7 +278,8 @@ or doador = 'JOAO BARBOSA FILHO' OR cpf_doador = '01261568087'
 or cpf_doador = '22885773804' or cpf_doador = '80503659991' # José de Carvalho de Filho
 or doador = 'RENATO ALVES VALE' # está sem cpf_doador
 or cpf_doador = '08545543786' or cpf_doador = '15945487000152' # hom Luciano Alves da Cruz
-
+#Pq Iguacu, esta com Odeb. mas com CNPJ de outra empresa, apenas 1 doacao
+or cpf_doador = '75057299000110'
 # Homônimos Sergio Luiz Neves 
 or cpf_doador = '52432742672' or cpf_doador LIKE '%7084586962' 
 #Rui Lemos Sampaio
@@ -320,8 +320,12 @@ or doador = 'CARIOCA CHRISTIANI NIELSEN ENGENHARIA S A'
 or doador =  'SIDIANA MARIA KIEPPER'
 or doador LIKE 'BRASKARKE%'
 or doador LIKE 'BRASKARNE%'
+or doador = 'CARLÃO DA SANEATINS'
 # Quattor só foi comprada pela Odebrecht em 2010
 or (ano < '2010' AND cpf_doador = '04705090000177')
 #Suzano Petroquimica comprada em 2007
-or (ano < '2007' AND cpf_doador = '04705090000258'); 
- 
+or (ano < '2007' AND cpf_doador = '04705090000258')
+#Antes de 2002 nao temos CPF
+or (doador LIKE 'ANTONIO DE CASTRO%' and ano < '2000')
+# PETIÇÃO 6.694  mostra que esquema com Petropolis começou em 2008
+or (doador LIKE 'CERVEJARIA PETR%' and ano < '2007');
