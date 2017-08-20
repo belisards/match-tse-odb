@@ -17,4 +17,4 @@ UPDATE `doacoes` SET `valor_at` = CASE
     END;
 
 # Converte para dolar
-    UPDATE `doacoes` SET `dolar` = valor_at / 3.2;
+    UPDATE `doacoes` SET `dolar` = valor_at / 3.29;

@@ -173,9 +173,9 @@ doacoes.valor,
 doacoes.dolar,
 doacoes.tipo
 FROM doacoes
-WHERE doador LIKE '%Brask%' or doador like 'supervia%'OR doador LIKE '%CETREL%' OR doador_original LIKE '%CETREL%'OR doador LIKE '%Odebre%' OR doador LIKE '%SANEATINS%' or doador like '%energipar%'OR doador LIKE '%Ordebr%' 
-OR doador LIKE '%Brasque%' OR  doador LIKE '%Oubrecht%' OR doador LIKE '%Adebrecht%' OR doador LIKE '%Odevrecht%' OR doador LIKE '%Oderbrecht%' OR doador LIKE '%Edebrecht%' OR doador LIKE '%Construtora Noberto%' OR doador LIKE 'Oubrecht' or doador LIKE 'quantiq' OR doador LIKE '%CETREL%' OR doador_original LIKE '%Brask%' OR doador_original LIKE '%Odebre%' or doador like 'CERVEJARIA PETR%'
-OR doador_original LIKE '%Brasque%' OR  doador_original LIKE '%Oubrecht%' OR doador_original LIKE '%Adebrecht%' OR doador_original LIKE '%Odevrecht%' OR doador_original LIKE '%Oderbrecht%' OR doador_original LIKE '%Edebrecht%' OR doador_original LIKE '%Construtora Noberto%' OR doador_original LIKE 'Oubrecht' OR doador_original LIKE '%CETREL%' or doador_original like 'CERVEJARIA PETR%';
+WHERE doador LIKE '%Brask%' or doador like 'supervia%'OR doador LIKE '%CETREL%' OR doador_original LIKE '%CETREL%'OR doador LIKE '%Odebr%' OR doador LIKE '%SANEATINS%' or doador like '%energipar%'OR doador LIKE '%Ordebr%' 
+OR doador LIKE '%Brasque%' OR  doador LIKE '%Oubrecht%' OR doador LIKE '%Adebrecht%' OR doador LIKE '%Odevrecht%' OR doador LIKE '%Oderbrecht%' OR doador LIKE '%Edebrecht%' OR doador LIKE '%Construtora Noberto%' OR doador LIKE 'Oubrecht' or doador LIKE 'quantiq' OR doador LIKE '%CETREL%' OR doador_original LIKE '%Brask%' OR doador_original LIKE '%Odebre%' or doador like 'CERVEJARIA PETR%' or doador LIKE '%leyroz%' or doador LIKE '%praiamar%'
+OR doador_original LIKE '%Brasque%' OR  doador_original LIKE '%Oubrecht%' OR doador_original LIKE '%Adebrecht%' OR doador_original LIKE '%Odevrecht%' OR doador_original LIKE '%Oderbrecht%' OR doador_original LIKE '%Edebrecht%' OR doador_original LIKE '%Construtora Noberto%' OR doador_original LIKE 'Oubrecht' OR doador_original LIKE '%CETREL%' or doador_original like 'CERVEJARIA PETR%' or doador_original LIKE '%leyroz%' or doador_original LIKE '%praiamar%';
 
 # Consulta por nome
 DROP TABLE IF EXISTS doa_rzsocial;
@@ -328,4 +328,8 @@ or (ano < '2007' AND cpf_doador = '04705090000258')
 #Antes de 2002 nao temos CPF
 or (doador LIKE 'ANTONIO DE CASTRO%' and ano < '2000')
 # PETIÇÃO 6.694  mostra que esquema com Petropolis começou em 2008
-or (doador LIKE 'CERVEJARIA PETR%' and ano < '2007');
+or (doador LIKE 'CERVEJARIA PETR%' and ano < '2007')
+# Removo o que nao é do Grupo Itaipava (Praiamar)
+or cpf_doador = '05278890000111'
+or doador = 'PRAIAMAR HOTEL'
+or doador = 'PRAIAMAR EMPREENDIMENTOS TURISTICOS LTDA'; 

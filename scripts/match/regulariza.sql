@@ -3,10 +3,9 @@ USE tse;
 update grupodb
 SET doador_norm = doador;
 
-# Copia o campo doador original para o campo doador, quando existir
 update grupodb
-SET doador_norm = doador_original
-where doador_original is not null and doador_original <> '';
+SET doador_norm = doador
+where doador;
 
 # Regulariza nomes
 UPDATE grupodb
@@ -89,6 +88,10 @@ SET doador_norm = 'Ismael Campos'
 WHERE doador LIKE 'Ismael Campos%';
 
 UPDATE grupodb
+SET doador_norm = 'SUPERVIAS'
+WHERE doador LIKE 'SUPERVIAS%';
+
+UPDATE grupodb
 SET doador_norm = 'Arnaldo Cumplido'
 WHERE doador LIKE 'Arnaldo Cumplido%';
 
@@ -97,8 +100,23 @@ SET doador_norm = 'FABIO GANDOLFO'
 WHERE doador LIKE 'FABIO ANDREANI%';
 
 UPDATE grupodb
+SET doador_norm = 'IQ SOLUÇÕES'
+WHERE doador LIKE 'IQ SOLUÇÕES%';
+
+UPDATE grupodb
+SET doador_norm = 'AGRO ENERGIA STA LUZIA'
+WHERE doador LIKE 'AGRO ENERGIA S%';
+
+UPDATE grupodb
 SET doador_norm = 'FRANCISCO PELTIER'
 WHERE doador LIKE 'FRANCISCO PELTIER%';
+
+UPDATE grupodb
+SET doador_norm = 'QUANTIQ'
+WHERE doador LIKE 'QUANT%'
+or doador_original LIKE 'QUANTIQ%'
+or cpf_doador LIKE '62227509%'
+or doador LIKE 'IPIRANGA COMERCIAL%';
 
 UPDATE grupodb
 SET doador_norm = 'Emílio O. Peltier'
@@ -135,6 +153,18 @@ SET doador_norm = 'SERGIO LUIZ'
 WHERE doador LIKE 'SERGIO LUIZ%'
 or doador_original LIKE 'SERGIO LUIZ%';
 
+UPDATE grupodb
+SET doador_norm = 'CERVEJARIA PETROPOLIS'
+WHERE doador LIKE 'CERVEJARIA PETR%'
+or doador_original LIKE 'CERVEJARIA PETR%'
+or cpf_doador = '20569363000150';
+
+
+UPDATE grupodb
+SET doador_norm = 'CERVEJARIA PETROPOLIS'
+WHERE doador LIKE 'CERVEJARIA PETR%'
+or doador_original LIKE 'CERVEJARIA PETR%';
+
 
 UPDATE grupodb
 SET doador_norm = 'RICARDO ROTH'
@@ -161,7 +191,22 @@ WHERE doador LIKE 'CETREL%'
 or doador_original LIKE 'CETREL%';
 
 UPDATE grupodb
+SET doador_norm = 'PRAIAMAR' 
+WHERE cpf_doador LIKE '00851567%'
+or doador like 'PRAIAMAR IND%';
+
+UPDATE grupodb
+SET doador_norm = 'LEYROZ DE CAXIAS' 
+WHERE cpf_doador LIKE '06958578%'
+or doador like 'leyroz%'
+or doador like 'ROF COMERCIAL%';
+
+UPDATE grupodb
 SET partido = 'DEM' 
 WHERE partido = 'PFL';
+
+UPDATE grupodb
+SET doador_norm = 'DAG CONSTRUTORA'
+WHERE doador LIKE 'DAG CONST%';
 
 UPDATE grupodb SET `doador_norm` = UPPER( `doador_norm` );
