@@ -84,7 +84,6 @@ xlsx2csv pre2002.xlsx > csv/pre2002.csv
 echo "=> Excluindo arquivo XLS"
 rm pre2002.xlsx
 
-
 # Import data from CSV into the database
 for sql in scripts/sql_load_csv/*.sql; do
 	echo "=> loading $sql..."
