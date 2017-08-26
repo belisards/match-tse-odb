@@ -25,13 +25,13 @@ uncompress() {
 clean() {
 	# Clean CSV files: remove null, spaces, semi-colon and non valid extra quotes
 	ano="$1"
-	sh ../scripts/clean_csv/clean_$ano.sh
+	sh ../scripts/clean/clean_$ano.sh
 }
 
 start=`date +%s`
 
 # Check if all commands required to run this script are available
-CMDS="wget unar mysql"
+CMDS="wget unar mysql xlsx2csv"
 for i in $CMDS; do
 	command -v $i >/dev/null && continue || { echo "=> install $i"; exit 1; }
 done
@@ -85,7 +85,7 @@ echo "=> Excluindo arquivo XLS"
 rm pre2002.xlsx
 
 # Import data from CSV into the database
-for sql in scripts/sql_load_csv/*.sql; do
+for sql in scripts/load/*.sql; do
 	echo "=> loading $sql..."
 	MYSQL_PWD=$DB_PASS mysql -vu$DB_USER -h$DB_HOST < $sql
 done

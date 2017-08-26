@@ -183,32 +183,6 @@ SET doador_norm = 'CETREL'
 WHERE doador LIKE 'CETREL%'
 or doador_original LIKE 'CETREL%';
 
-UPDATE laranjas
-SET doador_norm = 'CERVEJARIA PETROPOLIS'
-WHERE doador LIKE 'CERVEJARIA PETR%'
-or doador_original LIKE 'CERVEJARIA PETR%'
-or cpf_doador = '20569363000150'
-or doador LIKE 'CERVEJARIA PETR%'
-or doador_original LIKE 'CERVEJARIA PETR%';
-
-UPDATE laranjas
-SET doador_norm = 'PRAIAMAR'
-WHERE cpf_doador LIKE '00851567%'
-or doador like 'PRAIAMAR IND%'
-or doador_original like 'PRAIAMAR IND%';
-
-UPDATE laranjas
-SET doador_norm = 'LEYROZ'
-WHERE cpf_doador LIKE '00851567%'
-or cpf_doador LIKE '06958578%'
-or doador like 'leyroz%'
-or doador like 'ROF COMERCIAL%'
-or doador_original like 'ROF COMERCIAL%';
-
-UPDATE laranjas
-SET doador_norm = 'DAG CONSTRUTORA'
-WHERE doador LIKE 'DAG CONST%';
-
 #Update party names
 UPDATE grupodb
 SET partido = 'DEM' 
@@ -234,3 +208,30 @@ WHERE partido = 'PC do B';
 UPDATE grupodb SET `doador_norm` = UPPER( `doador_norm` );
 UPDATE grupodb SET `candidato` = UPPER( `candidato` );
 
+
+
+UPDATE laranjas
+SET doador_norm = 'PETROPOLIS'
+WHERE doador LIKE 'CERVERJARIA PETR%'
+or doador_original LIKE 'CERVEJARIA PETR%'
+or cpf_doador = '20569363000150'
+or doador LIKE 'CERVEJARIA PETR%'
+or doador_original LIKE 'CERVERJARIA PETR%';
+
+UPDATE laranjas
+SET doador_norm = 'PRAIAMAR'
+WHERE cpf_doador LIKE '00851567%'
+or doador like 'PRAIAMAR IND%'
+or doador_original like 'PRAIAMAR IND%';
+
+UPDATE laranjas
+SET doador_norm = 'LEYROZ'
+WHERE cpf_doador LIKE '00851567%'
+or cpf_doador LIKE '06958578%'
+or doador like 'leyroz%'
+or doador like 'ROF COMERCIAL%'
+or doador_original like 'ROF COMERCIAL%';
+
+UPDATE laranjas
+SET doador_norm = 'DAG CONSTRUTORA'
+WHERE doador LIKE 'DAG CONST%';

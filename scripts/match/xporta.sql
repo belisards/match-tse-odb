@@ -2,8 +2,7 @@ USE tse;
 
 CREATE OR REPLACE VIEW topdoa
 AS
-select doador_norm, sum(valor) as valor from grupodb 
-where doador_original is null or doador_original  = '' 
+select doador_norm, sum(valor_at) as valor from o 
 group by doador_norm order by valor desc;
 
 CREATE OR REPLACE VIEW o

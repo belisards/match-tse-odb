@@ -1,5 +1,5 @@
 USE tse;
-# Script para importar e fazer o match do Grupo Odebrecht
+# CREATE TABLES TO MATCH AND LOAD FILES
 
 DROP TABLE IF EXISTS odb;
 
@@ -20,7 +20,7 @@ CREATE TABLE odblike (
 
 load data local infile 'csv/matchlike.csv' into table odblike CHARACTER SET UTF8 fields terminated by ','  enclosed by '"'  lines terminated by '\n'  (nome);
 
-# Crias as views
+# CREATE VIEWS
 CREATE OR REPLACE VIEW documentos
 AS
 SELECT DISTINCT(TRIM(documento)) AS documento
@@ -40,8 +40,7 @@ SELECT DISTINCT SUBSTR(TRIM(documento), 1, 8) AS inicio
 FROM odb
 WHERE TRIM(documento) <> "" AND LENGTH(documento) > 11;
 
-
-# Cria tabela por LIKE original
+# Match by similar name - Indirect donations
 DROP TABLE IF EXISTS doa_nomelike_orig;
 CREATE TABLE doa_nomelike_orig AS 
 SELECT 
@@ -71,7 +70,7 @@ ON TRIM(doacoes.doador_original) LIKE CONCAT('%',odblike.nome, '%')
 WHERE TRIM(odblike.nome) <> '' ;
 
 
-# Cria tabela por LIKE
+# Match by similar name
 DROP TABLE IF EXISTS doa_nomelike;
 CREATE TABLE doa_nomelike AS 
 SELECT 
@@ -100,7 +99,7 @@ FROM doacoes INNER JOIN odblike
 ON TRIM(doacoes.doador) LIKE CONCAT('%',odblike.nome, '%')
 WHERE TRIM(odblike.nome) <> '' ;
 
-# Cria tabela por filial - CNPJ do doador originario
+# Match subsidiares - Indirect donations
 DROP TABLE IF EXISTS doa_filial_orig;
 CREATE TABLE doa_filial_orig AS
 SELECT 
@@ -129,7 +128,7 @@ FROM doacoes INNER JOIN prefixos_cnpj
 ON TRIM(doacoes.cpf_doador_original) LIKE CONCAT(prefixos_cnpj.inicio, '%')
 WHERE LENGTH(TRIM(doacoes.cpf_doador_original)) > 11 ;
 
-# Cria tabela por filial
+# Match subsidiaries
 DROP TABLE IF EXISTS doa_filial;
 CREATE TABLE doa_filial AS
 SELECT 
@@ -158,7 +157,7 @@ FROM doacoes INNER JOIN prefixos_cnpj
 ON TRIM(doacoes.cpf_doador) LIKE CONCAT(prefixos_cnpj.inicio, '%')
 WHERE LENGTH(TRIM(doacoes.cpf_doador)) > 11 ;
 
-# Cria tabela por documento
+# Match by document
 DROP TABLE IF EXISTS doa_doc;
 CREATE TABLE doa_doc AS
 SELECT 
@@ -187,7 +186,7 @@ FROM doacoes
 INNER JOIN documentos
 ON TRIM(doacoes.cpf_doador) = documentos.documento;
 
-# Cria tabela por documento - CPF original
+# Match by document - Indirect donations
 DROP TABLE IF EXISTS doa_doc_orig;
 CREATE TABLE doa_doc_orig AS
 SELECT 
@@ -217,7 +216,7 @@ INNER JOIN documentos
 ON TRIM(doacoes.cpf_doador_original) = documentos.documento;
 
 
-# Consulta por nome
+# MATCH BY NAME
 DROP TABLE IF EXISTS doa_rzsocial;
 CREATE TABLE doa_rzsocial AS
 SELECT 
@@ -246,7 +245,7 @@ FROM doacoes
 INNER JOIN nomes
 ON TRIM(doacoes.doador) = nomes.nome;
 
-# Consulta por nome - doador original
+# MATCH BY NAME - INDIRECT DONATIONS
 DROP TABLE IF EXISTS doa_rzsocial_orig;
 CREATE TABLE doa_rzsocial_orig AS
 SELECT 
@@ -275,7 +274,7 @@ FROM doacoes
 INNER JOIN nomes
 ON TRIM(doacoes.doador_original) = nomes.nome;
 
-# CRIA TABELA FINAL
+# JOIN ALL TABLES
 DROP TABLE IF EXISTS grupodb;
 CREATE TABLE grupodb AS
 SELECT 
@@ -310,7 +309,8 @@ SELECT
 *
 FROM doa_doc_orig;
 
-
+# MATCH THIRD-PARTY COMPANIES
+DROP TABLE IF EXISTS laranjas;
 CREATE TABLE laranjas AS
 SELECT 
 doacoes.id,
@@ -335,4 +335,7 @@ doacoes.valor,
 doacoes.dolar,
 doacoes.tipo
 FROM doacoes
-WHERE doador_original like 'CERVEJARIA PETR%' or doador_original LIKE '%leyroz%' or doador_original LIKE '%praiamar%' or doador like 'CERVEJARIA PETR%' or doador LIKE '%leyroz%' or doador LIKE '%praiamar%';
+WHERE doador_original like 'CERVEJARIA PETR%' or doador_original LIKE '%leyroz%' or doador_original LIKE '%praiamar%' or doador_original like 'dag const%' or doador_original like 'rof comercial%'
+or doador like 'CERVEJARIA PETR%' or doador LIKE '%leyroz%' or doador LIKE '%praiamar%' or doador like 'dag const%' or doador like 'rof comercial%'
+or cpf_doador like '06958578%' or cpf_doador like '00851567%' or cpf_doador like '08415791%' or cpf_doador like '73410326%'  
+or cpf_doador_original like '06958578%' or cpf_doador_original like '00851567%' or cpf_doador_original like '08415791%' or cpf_doador_original like '73410326%' ;

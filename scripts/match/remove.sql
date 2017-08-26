@@ -4,10 +4,11 @@ USE tse;
 
 DELETE FROM laranjas
 WHERE 
- (doador LIKE 'CERVEJARIA PETR%' and ano < '2007')
+ (doador_norm LIKE '%PETR%' and ano < '2007')
  or cpf_doador = '05278890000111'
- or doador LIKE 'PRAIAMAR%'
  or doador LIKE 'PRAIAMAR EMPREENDIMENTOS%'
+ or doador LIKE 'PRAIAMAR HOTEL%'
+ or doador LIKE '%GASOLEOS PRAIAMAR%'
  or doador LIKE 'odebrismar%'
  or doador like 'EDENILIO FERREIRA%';
 
@@ -70,5 +71,5 @@ or (ano < '2010' AND cpf_doador = '04705090000177')
 # Buys Suzano Petroquimica in 2007
 or (ano < '2007' AND cpf_doador = '04705090000258')
 or (doador LIKE 'ANTONIO DE CASTRO%' and ano < '2000')
-or (doador like 'mectron%' and ano < "2011");
-
+or (doador like 'mectron%' and ano < "2011")
+or doador like 'cobrape%';
