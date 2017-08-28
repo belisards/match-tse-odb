@@ -25,13 +25,38 @@ WHERE doador LIKE 'NORBERTO ODEBRECHT' and ano > '2000';
 
 UPDATE grupodb
 SET doador_norm = 'CBPO'
-WHERE doador LIKE 'CBPO%' or doador_original LIKE 'CBPO%' or doador LIKE 'C.B.P.O%' or doador LIKE 'CBOP' or cpf_doador = '61156410000110';
+WHERE doador LIKE 'CBPO%' or doador_original LIKE 'CBPO%' or doador LIKE 'C.B.P.O%' or doador LIKE 'CBOP' or cpf_doador = '61156410000110' or doador like 'cia bras%';
 
 UPDATE grupodb
 SET doador_norm = 'Braskem'
 WHERE cpf_doador LIKE '42150391%'
 or doador like 'Braske%'
 or doador_original like 'BRASKE%'; 
+
+UPDATE grupodb
+SET doador_norm = 'COPESUL'
+WHERE cpf_doador LIKE '88948492%'
+or doador like '%COPESUL%'; 
+
+UPDATE grupodb
+SET doador_norm = 'POLIALDEN'
+WHERE doador like 'POLIAD%'
+or doador like 'PULIAD%'
+or cpf_doador like '13545769%'
+or doador like 'POLIALD%'; 
+
+UPDATE grupodb
+SET doador_norm = 'NITROCARBONO'
+WHERE doador like 'NITROCARBONO%'; 
+
+UPDATE grupodb
+SET doador_norm = 'TRIKEM'
+WHERE doador like '%TRIKE%';
+
+UPDATE grupodb
+SET doador_norm = 'TRIKEM'
+WHERE cpf_doador LIKE '13558226%'
+or doador like '%TRIKE%';
 
 UPDATE grupodb
 SET doador_norm = 'QUANTIQ'
@@ -181,7 +206,8 @@ WHERE doador LIKE 'ODEBRECHT O%' or doador LIKE 'ODEBRECHT Ó%' or doador LIKE '
 UPDATE grupodb
 SET doador_norm = 'CETREL' 
 WHERE doador LIKE 'CETREL%'
-or doador_original LIKE 'CETREL%';
+or doador_original LIKE 'CETREL%'
+or cpf_doador like '07981796%';
 
 #Update party names
 UPDATE grupodb
@@ -235,3 +261,4 @@ or doador_original like 'ROF COMERCIAL%';
 UPDATE laranjas
 SET doador_norm = 'DAG CONSTRUTORA'
 WHERE doador LIKE 'DAG CONST%';
+
