@@ -64,7 +64,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes INNER JOIN odblike 
 ON TRIM(doacoes.doador_original) LIKE CONCAT('%',odblike.nome, '%')
 WHERE TRIM(odblike.nome) <> '' ;
@@ -94,7 +94,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes INNER JOIN odblike 
 ON TRIM(doacoes.doador) LIKE CONCAT('%',odblike.nome, '%')
 WHERE TRIM(odblike.nome) <> '' ;
@@ -123,7 +123,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes INNER JOIN prefixos_cnpj 
 ON TRIM(doacoes.cpf_doador_original) LIKE CONCAT(prefixos_cnpj.inicio, '%')
 WHERE LENGTH(TRIM(doacoes.cpf_doador_original)) > 11 ;
@@ -152,7 +152,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes INNER JOIN prefixos_cnpj 
 ON TRIM(doacoes.cpf_doador) LIKE CONCAT(prefixos_cnpj.inicio, '%')
 WHERE LENGTH(TRIM(doacoes.cpf_doador)) > 11 ;
@@ -181,7 +181,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes
 INNER JOIN documentos
 ON TRIM(doacoes.cpf_doador) = documentos.documento;
@@ -210,7 +210,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes
 INNER JOIN documentos
 ON TRIM(doacoes.cpf_doador_original) = documentos.documento;
@@ -240,7 +240,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes
 INNER JOIN nomes
 ON TRIM(doacoes.doador) = nomes.nome;
@@ -269,7 +269,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes
 INNER JOIN nomes
 ON TRIM(doacoes.doador_original) = nomes.nome;
@@ -333,7 +333,7 @@ doacoes.motivo,
 doacoes.valor_at,
 doacoes.valor,
 doacoes.dolar,
-doacoes.tipo
+doacoes.tipo, doacoes.fonte
 FROM doacoes
 WHERE doador_original like 'CERVEJARIA PETR%' or doador_original LIKE '%leyroz%' or doador_original LIKE '%praiamar%' or doador_original like 'dag const%' or doador_original like 'rof comercial%'
 or doador like 'CERVEJARIA PETR%' or doador LIKE '%leyroz%' or doador LIKE '%praiamar%' or doador like 'dag const%' or doador like 'rof comercial%'

@@ -20,6 +20,7 @@ CREATE TABLE `tse`.`doacoes` (
   `setor_economico` varchar(255) DEFAULT NULL,
   `data` varchar(20) DEFAULT NULL,
   `motivo` varchar(255) DEFAULT NULL,
+  `fonte` varchar(255) DEFAULT NULL,
   `valor` double(12,2) DEFAULT NULL,
   `valor_at` double(12,2) DEFAULT NULL,
   `dolar` double(12,2) DEFAULT NULL,

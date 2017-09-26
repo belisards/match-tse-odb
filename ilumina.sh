@@ -43,46 +43,46 @@ case $test_mysql in
   *alive*) echo "=> MySQL is Ok!";;
 esac
 
-# # TSE source / ~2.4GB zips > ~26.3GB unzipped
-url="http://agencia.tse.jus.br/estatistica/sead/odsele/prestacao_contas"
-fontes_tse=(
-  "$url/prestacao_contas_2002.zip"
-  "$url/prestacao_contas_2004.zip"
-  "$url/prestacao_contas_2006.zip"
-  "$url/prestacao_contas_2008.zip"
-  "$url/prestacao_contas_2010.zip"
-  "$url/prestacao_final_2012.zip"
-  "$url/prestacao_final_2014.zip"
-  "$url/prestacao_contas_final_2016.zip"
-)
-# # warning: se estrutura do ZIP ou headers mudarem, scripts/*.sql devem refletir mudanças.
+# # # TSE source / ~2.4GB zips > ~26.3GB unzipped
+# url="http://agencia.tse.jus.br/estatistica/sead/odsele/prestacao_contas"
+# fontes_tse=(
+#   "$url/prestacao_contas_2002.zip"
+#   "$url/prestacao_contas_2004.zip"
+#   "$url/prestacao_contas_2006.zip"
+#   "$url/prestacao_contas_2008.zip"
+#   "$url/prestacao_contas_2010.zip"
+#   "$url/prestacao_final_2012.zip"
+#   "$url/prestacao_final_2014.zip"
+#   "$url/prestacao_contas_final_2016.zip"
+# )
+# # # warning: se estrutura do ZIP ou headers mudarem, scripts/*.sql devem refletir mudanças.
 
-mkdir -p fontes_tse;
-cd fontes_tse;
-for i in ${fontes_tse[*]}; do
-	ano=$(echo "$i" | sed 's/[^0-9]*//g')
-	file=${i##*/}
-	mkdir -p $ano
+# mkdir -p fontes_tse;
+# cd fontes_tse;
+# for i in ${fontes_tse[*]}; do
+# 	ano=$(echo "$i" | sed 's/[^0-9]*//g')
+# 	file=${i##*/}
+# 	mkdir -p $ano
 
-	echo "=> baixando $ano..."
-	download "$i"
+# 	echo "=> baixando $ano..."
+# 	download "$i"
 
-	echo "=> descompactando $ano..."
-	uncompress "$file" "$ano"
+# 	echo "=> descompactando $ano..."
+# 	uncompress "$file" "$ano"
 
-	echo "=> limpando $ano..."
-	clean "$ano"
-done
-cd ..
+# 	echo "=> limpando $ano..."
+# 	clean "$ano"
+# done
+# cd ..
 
-# Baixa dados pré-2002. Fonte: TSE, digitalizado por David Samuels e adaptado por Bruno Carazza
-	echo "=> Baixando dados anteriores a 2002"
+# # Baixa dados pré-2002. Fonte: TSE, digitalizado por David Samuels e adaptado por Bruno Carazza
+# 	echo "=> Baixando dados anteriores a 2002"
 
-wget -O pre2002.xlsx http://leisenumeros.com.br/wp-content/uploads/2016/06/bruno-carazza-dados-de-doac3a7c3b5es-eleitorais-de-1994-e-1998-por-david-samuels-ajustados-por-bruno-carazza.xlsx
-echo "=> Convertendo dados pré-2002 para CSV"
-xlsx2csv pre2002.xlsx > csv/pre2002.csv
-echo "=> Excluindo arquivo XLS"
-rm pre2002.xlsx
+# wget -O pre2002.xlsx http://leisenumeros.com.br/wp-content/uploads/2016/06/bruno-carazza-dados-de-doac3a7c3b5es-eleitorais-de-1994-e-1998-por-david-samuels-ajustados-por-bruno-carazza.xlsx
+# echo "=> Convertendo dados pré-2002 para CSV"
+# xlsx2csv pre2002.xlsx > csv/pre2002.csv
+# echo "=> Excluindo arquivo XLS"
+# rm pre2002.xlsx
 
 # Import data from CSV into the database
 for sql in scripts/load/*.sql; do

@@ -20,6 +20,10 @@ or doador LIKE 'Contrutora%'
 or doador_original LIKE 'Const%';
 
 UPDATE grupodb
+SET doador_norm = 'ECOSTEEl'
+WHERE doador LIKE 'ECOSTEEL%';
+
+UPDATE grupodb
 SET doador_norm = 'NORBERTO ODEBRECHT'
 WHERE doador LIKE 'NORBERTO ODEBRECHT' and ano > '2000';
 

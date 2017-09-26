@@ -10,31 +10,31 @@ AS
 select * from grupodb 
 where (doador_original is null or doador_original  = '') and ano > '2000' ;
 
-# Only direct donations
+
+# Third-party donations
 SELECT 
-grupodb.id,
-grupodb.uf,
-grupodb.partido,
-grupodb.cargo,
-grupodb.candidato,
-grupodb.ano,
-grupodb.cpf_candidato,
-grupodb.doador,
-grupodb.doador_original,
-grupodb.doador_norm,
-grupodb.cpf_doador,
-grupodb.cpf_doador_original,
-grupodb.recurso,
-grupodb.data,
-grupodb.motivo,
-grupodb.valor,
-grupodb.valor_at,
-grupodb.dolar,
-grupodb.tipo
-FROM grupodb
-WHERE (doador_original IS NULL or doador_original = '') and ano > '2001'
-ORDER BY grupodb.id
-INTO OUTFILE '/var/lib/mysql-files/direta.csv'
+laranjas.id,
+laranjas.uf,
+laranjas.partido,
+laranjas.cargo,
+laranjas.candidato,
+laranjas.ano,
+laranjas.cpf_candidato,
+laranjas.doador,
+laranjas.doador_original,
+laranjas.doador_norm,
+laranjas.cpf_doador,
+laranjas.cpf_doador_original,
+laranjas.recurso,
+laranjas.data,
+laranjas.motivo,
+laranjas.valor,
+laranjas.valor_at,
+laranjas.dolar,
+laranjas.tipo
+FROM laranjas
+ORDER BY laranjas.id
+INTO OUTFILE '/var/lib/mysql-files/laranjas.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
@@ -60,6 +60,7 @@ grupodb.motivo,
 grupodb.valor,
 grupodb.valor_at,
 grupodb.dolar,
+grupodb.fonte,
 grupodb.tipo
 FROM grupodb
 ORDER BY grupodb.id
@@ -102,6 +103,36 @@ select partido, sum(valor) as valor from grupodb
 group by partido 
 order by valor desc
 INTO OUTFILE '/var/lib/mysql-files/partidos.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+
+# Only direct donations
+SELECT 
+grupodb.id,
+grupodb.uf,
+grupodb.partido,
+grupodb.cargo,
+grupodb.candidato,
+grupodb.ano,
+grupodb.cpf_candidato,
+grupodb.doador,
+grupodb.doador_original,
+grupodb.doador_norm,
+grupodb.cpf_doador,
+grupodb.cpf_doador_original,
+grupodb.recurso,
+grupodb.data,
+grupodb.motivo,
+grupodb.valor,
+grupodb.valor_at,
+grupodb.dolar,
+grupodb.tipo
+FROM grupodb
+WHERE (doador_original IS NULL or doador_original = '') and ano > '2001'
+ORDER BY grupodb.id
+INTO OUTFILE '/var/lib/mysql-files/direta.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
