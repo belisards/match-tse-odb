@@ -33,6 +33,4 @@ Os dados são do Repositório de Dados Eleitorais do TSE.
 
 Para os anos de 1994 e 1998, foram utilizados os dados disponibilizados por Bruno Carazza.
 
-Os valores são corrigidos tomando como base a inflação média de cada ano segundo o IPCA e convertidos de acordo com o dolár médio de junho de 2017.
-
-"grupodb.id","grupodb.uf","grupodb.partido","grupodb.cargo","grupodb.candidato","grupodb.ano","grupodb.cpf_candidato","grupodb.doador","grupodb.doador_original","grupodb.doador_norm","grupodb.cpf_doador","grupodb.cpf_doador_original","grupodb.recurso","grupodb.data","grupodb.motivo","grupodb.valor","grupodb.valor_at","grupodb.dolar","grupodb.tipo"
+Os valores mencionados nas reportagens foram corrigidos tomando como base a inflação média de cada ano segundo o IPCA e convertidos de acordo com o dolár médio de junho de 2017.
