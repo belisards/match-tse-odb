@@ -119,7 +119,6 @@ select sum(valor_at) as v from grupodb where ano < '2000' and cargo not like 'go
 # Total oposição
 select sum(valor_at) as v from grupodb where ano < '2000' and cargo not like 'govern%' and (partido = 'pt' or partido = 'psb' or partido = 'pdt');
 
-
 # Total
  select sum(valor_at) as v from grupodb where ano < '2000' and cargo not like 'govern%';
 
@@ -128,8 +127,13 @@ select sum(valor_at) as v from grupodb where ano < '2000' and cargo not like 'go
  select sum(valor_at) from grupodb where partido = 'pt' and cargo not like 'govern%' and ano < '2000';
 select * from grupodb where partido = 'pt' and cargo not like 'govern%' and ano < '2000'
 
+# Total período Lula - principais partidos
+select partido, sum(valor_at) from o where (partido = 'psdb' or partido = 'pmdb' or partido = 'pfl' or partido = 'dem' or partido= 'pt') and (ano > '2003' and ano < '2015') and (cargo like 'pres%' or cargo like 'senad%' or cargo like 'deputado fede%') group by partido;
+
 # Total período Lula
-select partido, sum(valor_at) from grupodb where (partido = 'psdb' or partido = 'pmdb' or partido = 'pfl' or partido = 'dem' or partido = 'pt') and (ano > '2003' and ano < '2015') and (cargo like 'pres%' or cargo like 'senad%' or cargo like 'deputado fede%') group by partido;
+select sum(valor_at) from  o where (partido = 'psdb' or partido = 'pmdb' or partido = 'pfl' or partido = 'dem' or partido = 'pt') and (ano > '2003' and ano < '2015') and (cargo like 'pres%' or cargo like 'senad%' or cargo like 'deputado fede%') ;
+
+
 
 ############################
 ## 
